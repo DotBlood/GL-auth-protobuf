@@ -2,7 +2,7 @@ build:
 	- protoc -I proto proto/auth/*.proto --go_out=./gen/go/ --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
 
 
-DEFAULT_MSG := "Default commit message"
+DEFAULT_MSG := Default commit message
 DEFAULT_TAG := 0.0.2
 
 gac:

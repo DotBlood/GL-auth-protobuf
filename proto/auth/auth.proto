@@ -7,7 +7,7 @@ option go_package = "github.com/DotBlood/GL-auth-protobuf;authv1";
 service AuthService {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
-    rpc Recover (RecoverRequest) returns (RecoverResponce);
+    rpc Recover (RecoverRequest) returns (RecoverResponse);
     rpc isAdmin (isAdminRequest) returns (isAdminResponse);
 }
 
@@ -44,7 +44,7 @@ message RecoverRequest {
     uint32 app_id = 3;
 }
 
-message RecoverResponce {
+message RecoverResponse {
     uint32 user_id = 1;
 }
 
