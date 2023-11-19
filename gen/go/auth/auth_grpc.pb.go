@@ -4,7 +4,7 @@
 // - protoc             v3.19.6
 // source: auth/auth.proto
 
-package authv1 
+package authv1
 
 import (
 	context "context"
@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type AuthServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	Recover(ctx context.Context, in *RecoverRequest, opts ...grpc.CallOption) (*RecoverResponce, error)
+	Recover(ctx context.Context, in *RecoverRequest, opts ...grpc.CallOption) (*RecoverResponse, error)
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 }
 
@@ -54,8 +54,8 @@ func (c *authServiceClient) Login(ctx context.Context, in *LoginRequest, opts ..
 	return out, nil
 }
 
-func (c *authServiceClient) Recover(ctx context.Context, in *RecoverRequest, opts ...grpc.CallOption) (*RecoverResponce, error) {
-	out := new(RecoverResponce)
+func (c *authServiceClient) Recover(ctx context.Context, in *RecoverRequest, opts ...grpc.CallOption) (*RecoverResponse, error) {
+	out := new(RecoverResponse)
 	err := c.cc.Invoke(ctx, "/auth.AuthService/Recover", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *authServiceClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opt
 type AuthServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	Recover(context.Context, *RecoverRequest) (*RecoverResponce, error)
+	Recover(context.Context, *RecoverRequest) (*RecoverResponse, error)
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
@@ -93,7 +93,7 @@ func (UnimplementedAuthServiceServer) Register(context.Context, *RegisterRequest
 func (UnimplementedAuthServiceServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedAuthServiceServer) Recover(context.Context, *RecoverRequest) (*RecoverResponce, error) {
+func (UnimplementedAuthServiceServer) Recover(context.Context, *RecoverRequest) (*RecoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Recover not implemented")
 }
 func (UnimplementedAuthServiceServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
