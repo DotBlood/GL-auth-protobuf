@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/DotBlood/GL-auth-protobuf;authv1";
+
+service AuthService {
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Recover (RecoverRequest) returns (RecoverResponse);
+    rpc isAdmin (isAdminRequest) returns (isAdminResponse);
+}
+
+// ------- Register ------- 
+message RegisterRequest {
+    string email = 1;
+    string username = 2;
+    string password = 3;
+    int32 app_id = 4;
+}
+
+message RegisterResponse {
+    oneof response {
+        string jwt_token = 1;
+        bytes error_data = 2;
+    };
+}
+
+// ------- Login ------- 
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+    int32 app_id = 3;
+}
+
+message LoginResponse {
+    oneof response {
+        string jwt_token = 1;
+        bytes error_data = 2;
+    };
+}
+
+
+// ------- Recover ------- 
+message RecoverRequest {
+    string email = 1;
+    string old_password = 2;
+    int32 app_id = 3;
+}
+
+message RecoverResponse {
+    oneof response {
+        bool sucess = 1;
+        bytes error_data = 2;
+    };
+}
+
+
+// ------- isAdmin ------- 
+message isAdminRequest {
+    int64 user_id = 1;
+}
+
+message isAdminResponse {
+    bool isAdmin = 1;
+}
